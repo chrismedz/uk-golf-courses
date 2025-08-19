@@ -1,1 +1,1 @@
-# uk-golf-courses
+# uk-golf-directory
