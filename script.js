@@ -1,4 +1,3 @@
-// Sample 5 courses - we can expand later
 const courses = [
   {
     name: "St Andrews Links (Old Course)",
@@ -6,7 +5,7 @@ const courses = [
     lat: 56.3429,
     lng: -2.8030,
     image: "https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    link: "course.html?course=standrews"
   },
   {
     name: "Royal Birkdale Golf Club",
@@ -14,7 +13,7 @@ const courses = [
     lat: 53.6050,
     lng: -3.0290,
     image: "https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    link: "course.html?course=royalbirkdale"
   },
   {
     name: "Royal St George’s Golf Club",
@@ -22,7 +21,7 @@ const courses = [
     lat: 51.2747,
     lng: 1.3761,
     image: "https://images.unsplash.com/photo-1526401485004-2fda9f4b43d3?auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    link: "course.html?course=royalstgeorges"
   },
   {
     name: "Muirfield",
@@ -30,7 +29,7 @@ const courses = [
     lat: 56.0365,
     lng: -2.8225,
     image: "https://images.unsplash.com/photo-1587174486073-4c4e5bc9a2b2?auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    link: "course.html?course=muirfield"
   },
   {
     name: "Royal Troon Golf Club",
@@ -38,7 +37,7 @@ const courses = [
     lat: 55.5445,
     lng: -4.6634,
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
-    link: "#"
+    link: "course.html?course=royaltroon"
   }
 ];
 
@@ -52,9 +51,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Add pins for each course
 courses.forEach(course => {
-  L.marker([course.lat, course.lng])
-    .addTo(map)
-    .bindPopup(`<b>${course.name}</b><br>${course.location}`);
+  const marker = L.marker([course.lat, course.lng]).addTo(map);
+  marker.bindPopup(`
+    <div style="text-align:center;">
+      <img src="${course.image}" alt="${course.name}" style="width:100px; border-radius:6px; margin-bottom:5px;">
+      <br><b>${course.name}</b><br>
+      ${course.location}<br>
+      <a href="${course.link}" style="color:#007bff; text-decoration:underline;">View Details</a>
+    </div>
+  `);
 });
 
 // Render course cards
