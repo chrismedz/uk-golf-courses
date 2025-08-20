@@ -1,95 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UK Golf Directory</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UK Golf Directory – Find UK Golf Courses</title>
+  <meta name="description" content="Explore UK golf courses with an interactive map and filters by county, par, length and difficulty. Each course page includes address, fees, photos and a map.">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Header -->
   <header class="site-header">
-    <h1>UK Golf Directory</h1>
-    <p class="tagline">Filter by county, par, length and difficulty — then dive into rich course pages with maps, fees, and flyover videos.</p>
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" class="logo">UK Golf Directory</a>
+        <p class="tagline">The smarter way to find UK golf courses</p>
+      </div>
+      <nav class="top-nav">
+        <a href="#map">Map</a>
+        <a href="#directory">Directory</a>
+        <a href="#featured">Featured</a>
+        <a href="#guides">Guides</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
-    <h2>Discover the Best Golf Courses Across the UK</h2>
-    <p>Browse hundreds of UK golf courses with detailed pages including maps, fees, flyovers, and more.</p>
-  </section>
-
-  <!-- Filters -->
-  <section class="filters">
-    <h2>Find Your Course</h2>
-    <form>
-      <select>
-        <option>All Counties</option>
-        <option>Scotland</option>
-        <option>England</option>
-        <option>Wales</option>
-        <option>Northern Ireland</option>
-      </select>
-      <select>
-        <option>Par</option>
-        <option>Par 3</option>
-        <option>Par 4</option>
-        <option>Par 5</option>
-      </select>
-      <select>
-        <option>Length</option>
-        <option>Short</option>
-        <option>Medium</option>
-        <option>Long</option>
-      </select>
-      <select>
-        <option>Difficulty</option>
-        <option>Beginner</option>
-        <option>Intermediate</option>
-        <option>Challenging</option>
-      </select>
-      <button type="submit">Search</button>
-    </form>
-  </section>
-
-  <!-- Featured Courses -->
-  <section class="featured-courses">
-    <h2>Featured Courses</h2>
-    <div class="course-grid">
-      <div class="course-card">
-        <img src="images/st-andrews.jpg" alt="St Andrews">
-        <h3>St Andrews Links</h3>
-        <p>Scotland • Par 72 • 6721 yards</p>
-        <a href="course.html?id=1" class="btn">View Details</a>
-      </div>
-      <div class="course-card">
-        <img src="images/royal-birkdale.jpg" alt="Royal Birkdale">
-        <h3>Royal Birkdale</h3>
-        <p>England • Par 70 • 7081 yards</p>
-        <a href="course.html?id=2" class="btn">View Details</a>
-      </div>
+    <div class="container">
+      <h1>Discover golf courses across the UK</h1>
+      <p>Filter by county, par, length and difficulty — then dive into rich course pages with maps, fees, and flyover videos.</p>
     </div>
   </section>
 
-  <!-- YouTube Section -->
-  <section class="featured-videos">
-    <h2>Flyover Videos</h2>
-    <div class="video-grid">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-        title="St Andrews Flyover" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
+  <!-- Ad slot -->
+  <div class="container">
+    <div class="ad ad-leaderboard" id="ad-home-top">
+      <!-- AdSense snippet goes here later -->
+      <span>Ad space – 728×90</span>
+    </div>
+  </div>
 
-      <iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" 
-        title="Royal Birkdale Flyover" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
+  <!-- Map + Filters -->
+  <section class="container layout-split" id="map">
+    <div class="panel">
+      <h2>Interactive Map</h2>
+      <div id="mapView" class="map" aria-label="UK golf course map"></div>
+      <div class="ad ad-map" id="ad-home-map">
+        <span>Ad space – 300×250</span>
+      </div>
+    </div>
+
+    <aside class="panel filters" aria-label="Filters">
+      <h2>Filters</h2>
+
+      <label>
+        Search (name / county)
+        <input id="q" type="search" placeholder="e.g. St Andrews or Surrey" autocomplete="off">
+      </label>
+
+      <label>
+        County
+        <select id="countySelect">
+          <option value="">Any county</option>
+        </select>
+      </label>
+
+      <label>
+        Type
+        <select id="typeSelect">
+          <option value="">Any type</option>
+          <option>Links</option>
+          <option>Parkland</option>
+          <option>Heathland</option>
+          <option>Downland</option>
+          <option>Inland Links</option>
+        </select>
+      </label>
+
+      <div class="grid-2">
+        <label>
+          Par (min)
+          <input id="parMin" type="number" min="60" max="80" step="1" placeholder="60">
+        </label>
+        <label>
+          Par (max)
+          <input id="parMax" type="number" min="60" max="80" step="1" placeholder="80">
+        </label>
+      </div>
+
+      <div class="grid-2">
+        <label>
+          Length min (yds)
+          <input id="lenMin" type="number" min="4000" max="8000" step="100" placeholder="5500">
+        </label>
+        <label>
+          Length max (yds)
+          <input id="lenMax" type="number" min="4000" max="8000" step="100" placeholder="7800">
+        </label>
+      </div>
+
+      <label>
+        Difficulty
+        <select id="difficultySelect">
+          <option value="">Any</option>
+          <option value="1">1 – Easiest</option>
+          <option value="2">2</option>
+          <option value="3">3 – Medium</option>
+          <option value="4">4</option>
+          <option value="5">5 – Hardest</option>
+        </select>
+      </label>
+
+      <button id="resetBtn" class="btn-secondary" type="button">Reset filters</button>
+    </aside>
+  </section>
+
+  <!-- Directory -->
+  <section class="container" id="directory">
+    <div class="section-head">
+      <h2>Course Directory</h2>
+      <p id="resultsCount">Loading courses…</p>
+    </div>
+    <div id="courseGrid" class="card-grid" aria-live="polite"></div>
+  </section>
+
+  <!-- Featured with YouTube -->
+  <section class="container" id="featured">
+    <div class="section-head">
+      <h2>Featured Courses – Flyover Videos</h2>
+    </div>
+    <div id="featuredGrid" class="featured-grid"></div>
+  </section>
+
+  <!-- Guides -->
+  <section class="container" id="guides">
+    <div class="section-head">
+      <h2>Guides & Rankings</h2>
+    </div>
+    <div class="card-grid guides-grid">
+      <article class="card guide">
+        <h3>Top 10 Golf Courses in Scotland</h3>
+        <p>Our editorial picks based on architecture, conditioning, and fun factor.</p>
+        <a href="guide-scotland-top10.html" class="btn">Read the list</a>
+      </article>
+      <article class="card guide">
+        <h3>Best UK Links Courses for Beginners</h3>
+        <p>Gentler links to learn the wind and turf without the pain.</p>
+        <a href="guide-links-beginners.html" class="btn">Read the guide</a>
+      </article>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 UK Golf Directory. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>UK Golf Directory</strong><br>
+        © 2025 • All rights reserved
+      </div>
+      <nav class="footer-nav">
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy</a>
+      </nav>
+    </div>
   </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="courses.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
