@@ -1,75 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Details - UK Golf Directory</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Details – UK Golf Directory</title>
+  <meta name="description" content="Detailed information about this UK golf course: address, contact, fees, par, length, slope, map and photos.">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-  <style>
-    .course-header { text-align: center; margin: 20px 0; }
-    .course-header img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 12px; }
-    .course-details { max-width: 900px; margin: auto; padding: 20px; }
-    .course-info { margin: 20px 0; }
-    #map { height: 400px; margin: 20px 0; border-radius: 12px; }
-    .course-gallery img { width: 32%; margin: 1%; border-radius: 8px; }
-    .course-gallery { display: flex; flex-wrap: wrap; justify-content: center; }
-    iframe { width: 100%; height: 400px; border-radius: 12px; margin-top: 20px; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>UK Golf Directory</h1>
-    <nav>
-      <a href="index.html">Home</a>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">UK Golf Directory</a>
+      <nav class="top-nav"><a href="index.html">All Courses</a></nav>
+    </div>
   </header>
 
   <main>
-    <section class="course-header">
-      <h2>St Andrews Links (Old Course)</h2>
-      <img src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=1600&q=80" alt="Golf Course">
+    <section class="course-header container">
+      <h1 id="c-name">Course Name</h1>
+      <img id="c-hero" src="" alt="Course photo">
     </section>
 
     <section class="course-details">
-      <div class="course-info">
-        <h3>Course Information</h3>
-        <p><strong>Location:</strong> St Andrews, Scotland</p>
-        <p><strong>Length:</strong> 6,721 yards</p>
-        <p><strong>Par:</strong> 72</p>
-        <p><strong>Slope Rating:</strong> 135</p>
-        <p><strong>Visitor Green Fee:</strong> £195</p>
-        <p><strong>Contact:</strong> +44 1334 466666 | info@standrews.com</p>
+      <div class="container">
+        <div class="info-grid">
+          <div class="box">
+            <h3>Essentials</h3>
+            <p><strong>County:</strong> <span id="c-county"></span></p>
+            <p><strong>Type:</strong> <span id="c-type"></span></p>
+            <p><strong>Length:</strong> <span id="c-length"></span> yds</p>
+            <p><strong>Par:</strong> <span id="c-par"></span></p>
+            <p><strong>Slope:</strong> <span id="c-slope"></span></p>
+            <p><strong>Difficulty:</strong> <span id="c-difficulty"></span>/5</p>
+          </div>
+          <div class="box">
+            <h3>Visitor Information</h3>
+            <p><strong>Green Fee:</strong> <span id="c-fees"></span></p>
+            <p><strong>Address:</strong> <span id="c-address"></span></p>
+            <p><strong>Contact:</strong> <span id="c-phone"></span></p>
+            <p><strong>Email:</strong> <a id="c-email" href="#"></a></p>
+            <p><strong>Website:</strong> <a id="c-website" href="#" rel="noopener" target="_blank">Visit site</a></p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:1.5rem">About</h3>
+        <p id="c-desc"></p>
+
+        <h3 style="margin-top:1.5rem">Map</h3>
+        <div id="c-map" class="map" style="height:420px"></div>
+
+        <h3 style="margin-top:1.5rem">Photos</h3>
+        <div class="gallery" id="c-gallery"></div>
+
+        <div id="c-video-wrap" style="margin-top:1.5rem; display:none">
+          <h3>Flyover Video</h3>
+          <iframe id="c-video" width="100%" height="420" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="ad ad-leaderboard" style="margin-top:1.5rem">
+          <span>Ad space – 728×90</span>
+        </div>
       </div>
-
-      <h3>Map</h3>
-      <div id="map"></div>
-
-      <h3>Gallery</h3>
-      <div class="course-gallery">
-        <img src="https://images.unsplash.com/photo-1526401485004-2fda9f4b43d3?auto=format&fit=crop&w=800&q=80" alt="Golf Image 1">
-        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80" alt="Golf Image 2">
-        <img src="https://images.unsplash.com/photo-1600180758895-34b77a7a89c5?auto=format&fit=crop&w=800&q=80" alt="Golf Image 3">
-      </div>
-
-      <h3>Course Flyover</h3>
-      <iframe src="https://www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen></iframe>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2024 UK Golf Directory</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 UK Golf Directory</div>
+      <nav class="footer-nav"><a href="index.html">Home</a></nav>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="courses.js"></script>
   <script>
-    const map = L.map('map').setView([56.3429, -2.8030], 14);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-    L.marker([56.3429, -2.8030]).addTo(map)
-      .bindPopup("St Andrews Links (Old Course)")
-      .openPopup();
+    // Get course by id from URL
+    const params = new URLSearchParams(location.search);
+    const id = Number(params.get("id"));
+    const c = courses.find(x => x.id === id) || courses[0];
+
+    // Populate
+    document.getElementById("c-name").textContent = c.name;
+    document.getElementById("c-hero").src = c.image;
+    document.getElementById("c-county").textContent = c.county + (c.country ? ", " + c.country : "");
+    document.getElementById("c-type").textContent = c.type;
+    document.getElementById("c-length").textContent = (c.length || 0).toLocaleString();
+    document.getElementById("c-par").textContent = c.par || "-";
+    document.getElementById("c-slope").textContent = c.slope || "-";
+    document.getElementById("c-difficulty").textContent = c.difficulty || "-";
+    document.getElementById("c-fees").textContent = c.fees || "Enquire";
+    document.getElementById("c-address").textContent = c.address || "";
+    document.getElementById("c-phone").textContent = c.phone || "";
+    const e = document.getElementById("c-email"); e.textContent = c.email || ""; e.href = c.email ? `mailto:${c.email}` : "#";
+    const w = document.getElementById("c-website"); w.href = c.website || "#";
+    document.getElementById("c-desc").textContent = c.description || "";
+
+    // Map
+    const map = L.map("c-map", { scrollWheelZoom:false }).setView([c.lat || 54.5, c.lng || -3], c.lat? 14 : 6);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
+    if (c.lat && c.lng) L.marker([c.lat, c.lng]).addTo(map).bindPopup(c.name);
+
+    // Gallery
+    const gal = document.getElementById("c-gallery");
+    (c.images && c.images.length ? c.images : [c.image]).forEach(src => {
+      const img = document.createElement("img");
+      img.src = src; img.alt = c.name; gal.appendChild(img);
+    });
+
+    // Video
+    if (c.youtube) {
+      document.getElementById("c-video-wrap").style.display = "block";
+      document.getElementById("c-video").src = `https://www.youtube.com/embed/${c.youtube}`;
+    }
   </script>
 </body>
 </html>
