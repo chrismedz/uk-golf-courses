@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golf Course Details</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+<body>
+  <header>
+    <h1 id="course-name">Course Name</h1>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+    </nav>
+  </header>
+
+  <main class="course-detail">
+    <!-- Featured Image -->
+    <section class="course-hero">
+      <img id="course-image" src="" alt="Course Image">
+    </section>
+
+    <!-- Info -->
+    <section class="course-info">
+      <h2>Overview</h2>
+      <p id="course-description">This is where the unique description for the course will go.</p>
+
+      <ul>
+        <li><strong>Location:</strong> <span id="course-location"></span></li>
+        <li><strong>Length:</strong> <span id="course-length"></span></li>
+        <li><strong>Par:</strong> <span id="course-par"></span></li>
+        <li><strong>Slope Rating:</strong> <span id="course-slope"></span></li>
+        <li><strong>Visitor Green Fee:</strong> <span id="course-fee"></span></li>
+      </ul>
+    </section>
+
+    <!-- Map -->
+    <section class="course-map">
+      <h2>Map</h2>
+      <div id="map" style="height: 400px;"></div>
+    </section>
+
+    <!-- Photos -->
+    <section class="course-gallery">
+      <h2>Gallery</h2>
+      <div class="gallery-grid" id="course-gallery"></div>
+    </section>
+
+    <!-- Video -->
+    <section class="course-video">
+      <h2>Flyover Video</h2>
+      <iframe id="course-video" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <!-- Ads -->
+    <section class="ad-slot">
+      <h2>Advertisement</h2>
+      <div class="ad-box">Ad space</div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 UK Golf Directory</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
