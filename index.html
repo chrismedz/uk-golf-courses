@@ -10,30 +10,37 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-  <header>
-    <h1>UK Golf Directory</h1>
-    <p>Explore the best golf courses across the UK</p>
+  <!-- Header / Hero -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>UK Golf Directory</h1>
+      <p>Discover and explore the best golf courses across the UK</p>
+    </div>
   </header>
 
+  <!-- Main content -->
   <main>
-    <section>
-      <h2>UK Golf Map</h2>
-      <div id="map" style="height: 500px; border-radius: 8px; margin-bottom: 20px;"></div>
+    <section class="map-section">
+      <h2>Interactive Map</h2>
+      <div id="map"></div>
     </section>
 
-    <section>
+    <section class="courses-section">
       <h2>Featured Courses</h2>
-      <div id="course-cards" class="cards"></div>
+      <div id="course-cards" class="course-grid">
+        <!-- JS will fill this -->
+      </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 UK Golf Directory</p>
+    <p>&copy; 2025 UK Golf Directory | All Rights Reserved</p>
+    <p><a href="mailto:info@ukgolfdirectory.co.uk">Contact Us</a></p>
   </footer>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- Our custom script -->
   <script src="script.js"></script>
 </body>
 </html>
