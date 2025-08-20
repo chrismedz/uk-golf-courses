@@ -1,72 +1,182 @@
-// Map init
-const map = L.map('mapEl').setView([54.5, -4], 6);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-
-// Fallback data if JSON fails to load
-const FALLBACK = [
-  {id:1,name:"St Andrews Links (Old Course)",town:"St Andrews",nation:"Scotland",par:72,holes:18,website:"https://www.standrews.com/",lat:56.3429,lng:-2.8034,images:["https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b"]},
-  {id:2,name:"Royal Birkdale Golf Club",town:"Southport",nation:"England",par:70,holes:18,website:"https://www.royalbirkdale.com/",lat:53.6291,lng:-3.0401,images:["https://images.unsplash.com/photo-1502904550040-7534597429ae"]},
-  {id:3,name:"Royal St George's Golf Club",town:"Sandwich",nation:"England",par:70,holes:18,website:"https://www.royalstgeorges.com/",lat:51.2740,lng:1.3673,images:["https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1"]},
-  {id:4,name:"Muirfield",town:"Gullane",nation:"Scotland",par:71,holes:18,website:"https://www.muirfield.org.uk/",lat:56.0375,lng:-2.8080,images:["https://images.unsplash.com/photo-1529927066849-953d92eebf86"]},
-  {id:5,name:"Carnoustie Golf Links",town:"Carnoustie",nation:"Scotland",par:72,holes:18,website:"https://www.carnoustiegolflinks.com/",lat:56.5016,lng:-2.7185,images:["https://images.unsplash.com/photo-1524492449090-1a065f3aefba"]}
+const courses = [
+  {
+    name: "St Andrews (Old Course)",
+    location: "St Andrews, Scotland",
+    par: 72,
+    bestScore: 62,
+    lat: 56.3429,
+    lng: -2.8030,
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/2f/St_Andrews_Old_Course.jpg"
+  },
+  {
+    name: "Royal Birkdale",
+    location: "Southport, England",
+    par: 72,
+    bestScore: 63,
+    lat: 53.6106,
+    lng: -3.0156,
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Royal_Birkdale_Clubhouse.jpg"
+  },
+  {
+    name: "Royal St George's",
+    location: "Sandwich, England",
+    par: 70,
+    bestScore: 64,
+    lat: 51.2747,
+    lng: 1.3663,
+    image: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Royal_St_George%27s_Clubhouse.jpg"
+  },
+  {
+    name: "Wentworth (West Course)",
+    location: "Virginia Water, England",
+    par: 72,
+    bestScore: 62,
+    lat: 51.3894,
+    lng: -0.5708,
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/41/Wentworth_Clubhouse.jpg"
+  },
+  {
+    name: "Muirfield",
+    location: "Gullane, Scotland",
+    par: 71,
+    bestScore: 65,
+    lat: 56.0319,
+    lng: -2.8156,
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Muirfield_Clubhouse.jpg"
+  },
+  {
+    name: "Sunningdale (Old Course)",
+    location: "Ascot, England",
+    par: 70,
+    bestScore: 62,
+    lat: 51.3853,
+    lng: -0.6558,
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Sunningdale_Old_Course.jpg"
+  },
+  {
+    name: "Carnoustie",
+    location: "Angus, Scotland",
+    par: 72,
+    bestScore: 63,
+    lat: 56.5039,
+    lng: -2.7150,
+    image: "https://upload.wikimedia.org/wikipedia/commons/6/62/Carnoustie_Golf_Links.jpg"
+  },
+  {
+    name: "Royal Troon",
+    location: "Ayrshire, Scotland",
+    par: 71,
+    bestScore: 64,
+    lat: 55.5447,
+    lng: -4.6631,
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Royal_Troon_Golf_Clubhouse.jpg"
+  },
+  {
+    name: "Trump Turnberry",
+    location: "Ayrshire, Scotland",
+    par: 71,
+    bestScore: 64,
+    lat: 55.3169,
+    lng: -4.8278,
+    image: "https://upload.wikimedia.org/wikipedia/commons/6/66/Turnberry_Clubhouse.jpg"
+  },
+  {
+    name: "Gleneagles (King's Course)",
+    location: "Perthshire, Scotland",
+    par: 71,
+    bestScore: 65,
+    lat: 56.2741,
+    lng: -3.7440,
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/73/Gleneagles_Clubhouse.jpg"
+  },
+  {
+    name: "Hillside Golf Club",
+    location: "Southport, England",
+    par: 72,
+    bestScore: 64,
+    lat: 53.6264,
+    lng: -3.0267,
+    image: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Hillside_Golf_Club.jpg"
+  },
+  {
+    name: "The Belfry (Brabazon)",
+    location: "Sutton Coldfield, England",
+    par: 72,
+    bestScore: 63,
+    lat: 52.5611,
+    lng: -1.7192,
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/5a/The_Belfry_Clubhouse.jpg"
+  },
+  {
+    name: "Walton Heath (Old Course)",
+    location: "Surrey, England",
+    par: 72,
+    bestScore: 65,
+    lat: 51.2717,
+    lng: -0.2228,
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Walton_Heath_Golf_Club.jpg"
+  },
+  {
+    name: "Royal Liverpool (Hoylake)",
+    location: "Wirral, England",
+    par: 71,
+    bestScore: 65,
+    lat: 53.3781,
+    lng: -3.1847,
+    image: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Royal_Liverpool_Clubhouse.jpg"
+  },
+  {
+    name: "Lytham & St Annes",
+    location: "Lancashire, England",
+    par: 70,
+    bestScore: 64,
+    lat: 53.7450,
+    lng: -3.0275,
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Royal_Lytham_%26_St_Annes_Golf_Club.jpg"
+  },
+  {
+    name: "Ganton Golf Club",
+    location: "North Yorkshire, England",
+    par: 71,
+    bestScore: 65,
+    lat: 54.2022,
+    lng: -0.4656,
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/82/Ganton_Golf_Club.jpg"
+  },
+  {
+    name: "Formby Golf Club",
+    location: "Merseyside, England",
+    par: 72,
+    bestScore: 64,
+    lat: 53.5581,
+    lng: -3.0681,
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Formby_Golf_Club.jpg"
+  },
+  {
+    name: "Woodhall Spa (Hotchkin Course)",
+    location: "Lincolnshire, England",
+    par: 73,
+    bestScore: 66,
+    lat: 53.1497,
+    lng: -0.2058,
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/46/Woodhall_Spa_Golf.jpg"
+  },
+  {
+    name: "Royal Portrush",
+    location: "Northern Ireland",
+    par: 72,
+    bestScore: 63,
+    lat: 55.1972,
+    lng: -6.6492,
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Royal_Portrush_Clubhouse.jpg"
+  },
+  {
+    name: "Portmarnock (Old Course)",
+    location: "Dublin, Ireland",
+    par: 71,
+    bestScore: 65,
+    lat: 53.4225,
+    lng: -6.1378,
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/cf/Portmarnock_Golf_Club.jpg"
+  }
 ];
-
-const markers = [];
-
-function renderCourses(courses){
-  const grid = document.getElementById('coursesGrid');
-  grid.innerHTML = '';
-
-  // Clear markers
-  markers.forEach(m => map.removeLayer(m));
-  markers.length = 0;
-
-  courses.forEach(c => {
-    // card
-    const img = (c.images && c.images[0]) ? c.images[0] : 'https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b';
-    const card = document.createElement('article');
-    card.className = 'card';
-    card.innerHTML = `
-      <img class="card-img" src="${img}" alt="${c.name}">
-      <div class="card-body">
-        <h3>${c.name}</h3>
-        <div class="meta">${c.town}, ${c.nation} • Par ${c.par} • ${c.holes} holes</div>
-        <div class="row">
-          <a class="btn-small" href="${c.website}" target="_blank" rel="noopener">Visit Website</a>
-          <a class="btn-small" href="#map" data-goto="${c.id}">View on Map</a>
-        </div>
-      </div>`;
-    grid.appendChild(card);
-
-    // marker
-    if (typeof c.lat === 'number' && typeof c.lng === 'number') {
-      const m = L.marker([c.lat, c.lng]).addTo(map);
-      m.bindPopup(`<b>${c.name}</b><br>${c.town}, ${c.nation}`);
-      m._id = c.id;
-      markers.push(m);
-    }
-  });
-
-  // Scroll to marker
-  grid.addEventListener('click', (e) => {
-    const a = e.target.closest('a[data-goto]');
-    if(!a) return;
-    const id = Number(a.getAttribute('data-goto'));
-    const m = markers.find(x => x._id === id);
-    if(m){
-      map.setView(m.getLatLng(), 11, {animate:true});
-      m.openPopup();
-    }
-  });
-}
-
-function loadCourses(){
-  fetch('./data/courses.json')
-    .then(r => { if(!r.ok) throw new Error('Not OK'); return r.json(); })
-    .then(renderCourses)
-    .catch(() => renderCourses(FALLBACK));
-}
-
-loadCourses();
