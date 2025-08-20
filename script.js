@@ -1,96 +1,74 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
-}
+// Sample 5 courses - we can expand later
+const courses = [
+  {
+    name: "St Andrews Links (Old Course)",
+    location: "St Andrews, Scotland",
+    lat: 56.3429,
+    lng: -2.8030,
+    image: "https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=800&q=80",
+    link: "#"
+  },
+  {
+    name: "Royal Birkdale Golf Club",
+    location: "Southport, England",
+    lat: 53.6050,
+    lng: -3.0290,
+    image: "https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?auto=format&fit=crop&w=800&q=80",
+    link: "#"
+  },
+  {
+    name: "Royal St George’s Golf Club",
+    location: "Sandwich, England",
+    lat: 51.2747,
+    lng: 1.3761,
+    image: "https://images.unsplash.com/photo-1526401485004-2fda9f4b43d3?auto=format&fit=crop&w=800&q=80",
+    link: "#"
+  },
+  {
+    name: "Muirfield",
+    location: "Gullane, Scotland",
+    lat: 56.0365,
+    lng: -2.8225,
+    image: "https://images.unsplash.com/photo-1587174486073-4c4e5bc9a2b2?auto=format&fit=crop&w=800&q=80",
+    link: "#"
+  },
+  {
+    name: "Royal Troon Golf Club",
+    location: "Troon, Scotland",
+    lat: 55.5445,
+    lng: -4.6634,
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80",
+    link: "#"
+  }
+];
 
-.hero {
-  background: url('https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
-  color: white;
-  height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.hero-text h1 {
-  font-size: 3rem;
-  margin: 0;
-}
-.hero-text p {
-  font-size: 1.2rem;
-}
+// Initialize Leaflet map
+const map = L.map('map').setView([54.5, -4], 6);
 
-main {
-  padding: 20px;
-}
-h2 {
-  color: #004d00;
-  margin-bottom: 15px;
-}
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
-.map-section {
-  margin-bottom: 40px;
-}
-#map {
-  width: 100%;
-  height: 400px;
-  border-radius: 8px;
-}
+// Add pins for each course
+courses.forEach(course => {
+  L.marker([course.lat, course.lng])
+    .addTo(map)
+    .bindPopup(`<b>${course.name}</b><br>${course.location}`);
+});
 
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-.course-card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  overflow: hidden;
-  transition: transform 0.3s;
-}
-.course-card:hover {
-  transform: translateY(-5px);
-}
-.course-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-.course-card h3 {
-  margin: 10px;
-}
-.course-card p {
-  margin: 8px 10px;
-}
-.course-card a {
-  display: block;
-  margin: 10px;
-  padding: 8px;
-  background: #004d00;
-  color: white;
-  text-align: center;
-  border-radius: 6px;
-  text-decoration: none;
-}
-.course-card a:hover {
-  background: #007700;
-}
+// Render course cards
+const courseContainer = document.getElementById("course-cards");
+courses.forEach(course => {
+  const card = document.createElement("div");
+  card.classList.add("course-card");
 
-footer {
-  background: #004d00;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 30px;
-}
-footer a {
-  color: #ffd700;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
+  card.innerHTML = `
+    <img src="${course.image}" alt="${course.name}">
+    <h3>${course.name}</h3>
+    <p>${course.location}</p>
+    <a href="${course.link}">View Details</a>
+  `;
+
+  courseContainer.appendChild(card);
+});
