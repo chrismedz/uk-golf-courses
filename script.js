@@ -1,4 +1,3 @@
-// Our course data
 const courses = [
   {
     name: "St Andrews (Old Course)",
