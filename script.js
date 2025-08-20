@@ -1,3 +1,4 @@
+// Our course data
 const courses = [
   {
     name: "St Andrews (Old Course)",
@@ -180,3 +181,31 @@ const courses = [
     image: "https://upload.wikimedia.org/wikipedia/commons/c/cf/Portmarnock_Golf_Club.jpg"
   }
 ];
+
+// Show cards on the homepage
+const container = document.getElementById("course-cards");
+
+courses.forEach((course, index) => {
+  const card = document.createElement("div");
+  card.classList.add("course-card");
+  card.innerHTML = `
+    <img src="${course.image}" alt="${course.name}">
+    <h3>${course.name}</h3>
+    <p>${course.location}</p>
+    <p>Par: ${course.par}</p>
+    <p>Best Score: ${course.bestScore}</p>
+    <a href="course.html?id=${index}">View Details</a>
+  `;
+  container.appendChild(card);
+});
+
+// Add pins to the map (Leaflet.js assumed)
+const map = L.map('map').setView([54.5, -3], 5); // Center UK
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap'
+}).addTo(map);
+
+courses.forEach((course, index) => {
+  const marker = L.marker([course.lat, course.lng]).addTo(map);
+  marker.bindPopup(`<b>${course.name}</b><br><a href="course.html?id=${index}">View Details</a>`);
+});
