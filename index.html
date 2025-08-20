@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UK Golf Directory – Find UK Golf Courses</title>
-  <meta name="description" content="Explore UK golf courses with interactive map, filters by county, par, length and more.">
+  <meta name="description" content="Explore UK golf courses with an interactive map and filters by county, par, length and difficulty. Each course page includes address, fees, photos and a map.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
@@ -25,18 +25,17 @@
     </div>
   </header>
 
-  <!-- Hero -->
   <section class="hero">
     <div class="container">
       <h1>Discover golf courses across the UK</h1>
-      <p>Search by county, par, length, and difficulty — then dive into rich course pages with maps, fees, and flyover videos.</p>
+      <p>Filter by county, par, length and difficulty — then dive into rich course pages with maps, fees, and flyover videos.</p>
     </div>
   </section>
 
-  <!-- Ad slot (leaderboard) -->
+  <!-- Ad slot -->
   <div class="container">
     <div class="ad ad-leaderboard" id="ad-home-top">
-      <!-- Google AdSense goes here later -->
+      <!-- AdSense snippet goes here later -->
       <span>Ad space – 728×90</span>
     </div>
   </div>
@@ -45,17 +44,18 @@
   <section class="container layout-split" id="map">
     <div class="panel">
       <h2>Interactive Map</h2>
-      <div id="mapView" class="map"></div>
+      <div id="mapView" class="map" aria-label="UK golf course map"></div>
       <div class="ad ad-map" id="ad-home-map">
         <span>Ad space – 300×250</span>
       </div>
     </div>
 
-    <aside class="panel filters">
+    <aside class="panel filters" aria-label="Filters">
       <h2>Filters</h2>
+
       <label>
         Search (name / county)
-        <input id="q" type="search" placeholder="e.g. St Andrews or Surrey">
+        <input id="q" type="search" placeholder="e.g. St Andrews or Surrey" autocomplete="off">
       </label>
 
       <label>
@@ -111,7 +111,7 @@
         </select>
       </label>
 
-      <button id="resetBtn" class="btn-secondary">Reset filters</button>
+      <button id="resetBtn" class="btn-secondary" type="button">Reset filters</button>
     </aside>
   </section>
 
@@ -121,23 +121,21 @@
       <h2>Course Directory</h2>
       <p id="resultsCount">Loading courses…</p>
     </div>
-    <div id="courseGrid" class="card-grid"></div>
+    <div id="courseGrid" class="card-grid" aria-live="polite"></div>
   </section>
 
   <!-- Featured with YouTube -->
   <section class="container" id="featured">
     <div class="section-head">
       <h2>Featured Courses – Flyover Videos</h2>
-      <p>Watch hole-by-hole flyovers from ten iconic UK courses.</p>
     </div>
     <div id="featuredGrid" class="featured-grid"></div>
   </section>
 
-  <!-- Guides / unique content for SEO -->
+  <!-- Guides -->
   <section class="container" id="guides">
     <div class="section-head">
       <h2>Guides & Rankings</h2>
-      <p>Hand-picked lists to help you plan your next round.</p>
     </div>
     <div class="card-grid guides-grid">
       <article class="card guide">
@@ -167,4 +165,8 @@
     </div>
   </footer>
 
-  <script src="https
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="courses.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
