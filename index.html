@@ -1,35 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UK Golf Directory</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-text">
-      <h1>UK Golf Directory</h1>
-      <p>Discover and explore the best golf courses across the UK</p>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">UK Golf Directory</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#map">Map</a>
+        <a href="#courses">Courses</a>
+        <a href="#about">About</a>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <section class="map-section">
-      <h2>Interactive Map</h2>
-      <div id="map"></div>
+  <section class="hero" id="home" aria-label="Hero">
+    <div class="hero-inner container">
+      <h1>Discover the Best Golf Courses Across the UK</h1>
+      <p>Explore our interactive map and beautiful course profiles.</p>
+      <a class="btn" href="#map">View the Map</a>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="map-section">
+      <h2 id="map">Interactive Map</h2>
+      <div id="mapEl" role="region" aria-label="Map of UK golf courses"></div>
     </section>
 
-    <section class="courses-section">
-      <h2>Featured Courses</h2>
-      <div id="course-cards" class="course-grid"></div>
+    <section id="courses-section">
+      <h2 id="courses">Featured Courses</h2>
+      <div id="coursesGrid" class="grid"></div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 UK Golf Directory | All Rights Reserved</p>
-    <p><a href="mailto:info@ukgolfdirectory.co.uk">Contact Us</a></p>
+  <footer class="site-footer" id="about">
+    <div class="container footer-inner">
+      <div>
+        <h3>About</h3>
+        <p>The UK Golf Directory is a simple, elegant way to browse top UK courses with an interactive map. More courses coming soon.</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p>General enquiries: info@ukgolfdirectory.co.uk (placeholder)</p>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <p>&copy; 2025 UK Golf Directory. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
