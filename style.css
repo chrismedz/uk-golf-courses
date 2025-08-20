@@ -50,3 +50,36 @@ nav a:hover{color:var(--brand)}
 .footer-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .site-footer h3{margin:0 0 8px;font-size:1rem}
 .site-footer p{margin:0;color:var(--muted);font-size:.95rem}
+/* Ad styling */
+.ad { text-align:center; margin:16px 0; }
+.ad p { font-size:.8rem; color:var(--muted); margin:0 0 4px; }
+.ad-box {
+  background:#223044; border:1px dashed #445; 
+  color:var(--muted); font-size:.85rem; 
+  display:flex; align-items:center; justify-content:center; 
+  min-height:80px;
+}
+
+/* Specific ad placements */
+.ad-header { display:block; }
+.ad-sidebar { float:right; width:300px; margin-left:20px; display:none; }
+.ad-footer {
+  display:none;
+  position:fixed; bottom:0; left:0; right:0; 
+  background:var(--surface); border-top:1px solid var(--border); 
+  padding:6px; z-index:9999;
+}
+
+/* Responsive ads */
+@media(min-width:900px){
+  .ad-sidebar { display:block; }
+  .ad-footer { display:none; }
+}
+@media(max-width:899px){
+  .ad-header { display:none; }
+  .ad-sidebar { display:none; }
+  .ad-footer { display:block; }
+}
+
+/* Ad as card */
+.ad-card { border-style:dashed; text-align:center; }
