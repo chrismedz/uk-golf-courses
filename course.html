@@ -3,68 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Golf Course Details</title>
+  <title>Course Details - UK Golf Directory</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <style>
+    .course-header { text-align: center; margin: 20px 0; }
+    .course-header img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 12px; }
+    .course-details { max-width: 900px; margin: auto; padding: 20px; }
+    .course-info { margin: 20px 0; }
+    #map { height: 400px; margin: 20px 0; border-radius: 12px; }
+    .course-gallery img { width: 32%; margin: 1%; border-radius: 8px; }
+    .course-gallery { display: flex; flex-wrap: wrap; justify-content: center; }
+    iframe { width: 100%; height: 400px; border-radius: 12px; margin-top: 20px; }
+  </style>
 </head>
 <body>
   <header>
-    <h1 id="course-name">Course Name</h1>
+    <h1>UK Golf Directory</h1>
     <nav>
-      <a href="index.html">🏠 Home</a>
+      <a href="index.html">Home</a>
     </nav>
   </header>
 
-  <main class="course-detail">
-    <!-- Featured Image -->
-    <section class="course-hero">
-      <img id="course-image" src="" alt="Course Image">
+  <main>
+    <section class="course-header">
+      <h2>St Andrews Links (Old Course)</h2>
+      <img src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=1600&q=80" alt="Golf Course">
     </section>
 
-    <!-- Info -->
-    <section class="course-info">
-      <h2>Overview</h2>
-      <p id="course-description">This is where the unique description for the course will go.</p>
+    <section class="course-details">
+      <div class="course-info">
+        <h3>Course Information</h3>
+        <p><strong>Location:</strong> St Andrews, Scotland</p>
+        <p><strong>Length:</strong> 6,721 yards</p>
+        <p><strong>Par:</strong> 72</p>
+        <p><strong>Slope Rating:</strong> 135</p>
+        <p><strong>Visitor Green Fee:</strong> £195</p>
+        <p><strong>Contact:</strong> +44 1334 466666 | info@standrews.com</p>
+      </div>
 
-      <ul>
-        <li><strong>Location:</strong> <span id="course-location"></span></li>
-        <li><strong>Length:</strong> <span id="course-length"></span></li>
-        <li><strong>Par:</strong> <span id="course-par"></span></li>
-        <li><strong>Slope Rating:</strong> <span id="course-slope"></span></li>
-        <li><strong>Visitor Green Fee:</strong> <span id="course-fee"></span></li>
-      </ul>
-    </section>
+      <h3>Map</h3>
+      <div id="map"></div>
 
-    <!-- Map -->
-    <section class="course-map">
-      <h2>Map</h2>
-      <div id="map" style="height: 400px;"></div>
-    </section>
+      <h3>Gallery</h3>
+      <div class="course-gallery">
+        <img src="https://images.unsplash.com/photo-1526401485004-2fda9f4b43d3?auto=format&fit=crop&w=800&q=80" alt="Golf Image 1">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80" alt="Golf Image 2">
+        <img src="https://images.unsplash.com/photo-1600180758895-34b77a7a89c5?auto=format&fit=crop&w=800&q=80" alt="Golf Image 3">
+      </div>
 
-    <!-- Photos -->
-    <section class="course-gallery">
-      <h2>Gallery</h2>
-      <div class="gallery-grid" id="course-gallery"></div>
-    </section>
-
-    <!-- Video -->
-    <section class="course-video">
-      <h2>Flyover Video</h2>
-      <iframe id="course-video" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
-    </section>
-
-    <!-- Ads -->
-    <section class="ad-slot">
-      <h2>Advertisement</h2>
-      <div class="ad-box">Ad space</div>
+      <h3>Course Flyover</h3>
+      <iframe src="https://www.youtube.com/embed/Scxs7L0vhZ4" frameborder="0" allowfullscreen></iframe>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 UK Golf Directory</p>
+    <p>&copy; 2024 UK Golf Directory</p>
   </footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="script.js"></script>
+  <script>
+    const map = L.map('map').setView([56.3429, -2.8030], 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    L.marker([56.3429, -2.8030]).addTo(map)
+      .bindPopup("St Andrews Links (Old Course)")
+      .openPopup();
+  </script>
 </body>
 </html>
