@@ -12,6 +12,16 @@ body {
   color: #222;
 }
 
+/* ===== Ad Banner ===== */
+.ad-banner {
+  background: #f1f1f1;
+  text-align: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #555;
+}
+
 /* ===== Header ===== */
 .site-header {
   background: #003300;
@@ -43,42 +53,43 @@ body {
   color: #fff;
 }
 
-.hero h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-/* ===== Filters ===== */
-.filters {
-  padding: 30px 20px;
+/* ===== Map Section ===== */
+.map-section {
+  padding: 40px 20px;
   text-align: center;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ===== Find a Course ===== */
+.find-course {
+  padding: 40px 20px;
   background: #fff;
-  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
-.filters form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+.az-list {
+  margin: 15px 0;
 }
 
-.filters select, .filters button {
-  padding: 10px;
+.az-list a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #006400;
+  font-weight: bold;
+}
+
+.course-list {
+  list-style: none;
+  margin-top: 15px;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.filters button {
-  background: #006400;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-}
-
-.filters button:hover {
-  background: #228B22;
+  color: #333;
 }
 
 /* ===== Featured Courses ===== */
@@ -112,51 +123,23 @@ body {
   margin-bottom: 15px;
 }
 
-.course-card h3 {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-}
-
-.course-card p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.course-card .btn {
-  display: inline-block;
-  padding: 10px 15px;
-  background: #006400;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-}
-
-.course-card .btn:hover {
-  background: #228B22;
-}
-
-/* ===== Featured Videos ===== */
+/* ===== Videos ===== */
 .featured-videos {
   padding: 40px 20px;
   text-align: center;
-}
-
-.featured-videos h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
 }
 
 .video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
-  justify-items: center;
+  margin-top: 20px;
 }
 
 .video-grid iframe {
   width: 100%;
   max-width: 500px;
+  height: 280px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
@@ -168,15 +151,4 @@ footer {
   margin-top: 40px;
   background: #003300;
   color: #fff;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  .hero h2 {
-    font-size: 1.6rem;
-  }
-
-  .site-header h1 {
-    font-size: 2rem;
-  }
 }
