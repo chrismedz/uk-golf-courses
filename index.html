@@ -1,126 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UK Golf Directory</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UK Golf Directory – Find Courses Near You</title>
+  <meta name="description" content="Discover and filter UK golf courses by county, par, length and difficulty. View details, flyover videos, maps and fees.">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-  <!-- Ad Banner Placeholder -->
-  <div class="ad-banner">
-    <p>Ad Space – Your Ad Here</p>
-    <!-- Later replace with AdSense script -->
-  </div>
-
-  <!-- Header -->
   <header class="site-header">
-    <h1>UK Golf Directory</h1>
-    <p class="tagline">Filter by county, par, length and difficulty — then dive into rich course pages with maps, fees, and flyover videos.</p>
+    <div class="container header-inner">
+      <a class="logo" href="index.html">UK Golf Directory</a>
+      <nav class="top-nav">
+        <a href="courses.html">Full A–Z Directory</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h2>Discover the Best Golf Courses Across the UK</h2>
-    <p>Browse hundreds of UK golf courses with detailed pages including maps, fees, flyovers, and more.</p>
-  </section>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1>Find Your Perfect UK Golf Course</h1>
+        <p>Filter by county, par, length and difficulty — then explore rich course pages with maps, fees, and flyover videos.</p>
+      </div>
+    </section>
 
-  <!-- Interactive Map -->
-  <section class="map-section">
-    <h2>Explore Courses on the Map</h2>
-    <div id="map"></div>
-  </section>
-
-  <!-- Find a Course (A-Z List) -->
-  <section class="find-course">
-    <h2>Find a Course</h2>
-    <div class="az-list">
-      <a href="#">A</a><a href="#">B</a><a href="#">C</a> ... <a href="#">Z</a>
+    <!-- Ad Slot -->
+    <div class="ad ad-leaderboard">
+      <span>Ad space – 728×90</span>
     </div>
-    <ul class="course-list">
-      <li>St Andrews Links – Scotland</li>
-      <li>Royal Birkdale – England</li>
-      <li>Royal Portrush – Northern Ireland</li>
-      <li>Celtic Manor – Wales</li>
-      <li>Wentworth Club – England</li>
-    </ul>
-  </section>
 
-  <!-- Featured Courses -->
-  <section class="featured-courses">
-    <h2>Featured Courses</h2>
-    <div class="course-grid">
-      <div class="course-card">
-        <img src="images/st-andrews.jpg" alt="St Andrews">
-        <h3>St Andrews Links</h3>
-        <p>Scotland • Par 72 • 6721 yards</p>
-        <a href="course.html?id=1" class="btn">View Details</a>
+    <!-- Map -->
+    <section class="map-section container">
+      <h2>Explore the Map</h2>
+      <div id="map" class="map"></div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters container">
+      <h2>Filter Courses</h2>
+      <div class="filter-grid">
+        <select id="filter-county">
+          <option value="">All Counties</option>
+        </select>
+        <select id="filter-par">
+          <option value="">All Pars</option>
+          <option value="3">Par 3</option>
+          <option value="4">Par 4</option>
+          <option value="5">Par 5</option>
+        </select>
+        <select id="filter-length">
+          <option value="">Any Length</option>
+          <option value="short">Up to 5,500 yds</option>
+          <option value="medium">5,500 – 6,500 yds</option>
+          <option value="long">6,500+ yds</option>
+        </select>
+        <select id="filter-difficulty">
+          <option value="">Any Difficulty</option>
+          <option value="1">★ Easy</option>
+          <option value="2">★★ Fair</option>
+          <option value="3">★★★ Moderate</option>
+          <option value="4">★★★★ Challenging</option>
+          <option value="5">★★★★★ Hard</option>
+        </select>
       </div>
-      <div class="course-card">
-        <img src="images/royal-birkdale.jpg" alt="Royal Birkdale">
-        <h3>Royal Birkdale</h3>
-        <p>England • Par 70 • 7081 yards</p>
-        <a href="course.html?id=2" class="btn">View Details</a>
-      </div>
-      <div class="course-card">
-        <img src="images/royal-portrush.jpg" alt="Royal Portrush">
-        <h3>Royal Portrush</h3>
-        <p>Northern Ireland • Par 72 • 7317 yards</p>
-        <a href="course.html?id=3" class="btn">View Details</a>
-      </div>
-      <div class="course-card">
-        <img src="images/celtic-manor.jpg" alt="Celtic Manor">
-        <h3>Celtic Manor</h3>
-        <p>Wales • Par 71 • 7493 yards</p>
-        <a href="course.html?id=4" class="btn">View Details</a>
-      </div>
-      <div class="course-card">
-        <img src="images/wentworth.jpg" alt="Wentworth">
-        <h3>Wentworth Club</h3>
-        <p>England • Par 72 • 7302 yards</p>
-        <a href="course.html?id=5" class="btn">View Details</a>
-      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results container">
+      <h2>Featured Courses</h2>
+      <div id="results-grid" class="grid"></div>
+    </section>
+
+    <!-- CTA to A–Z -->
+    <section class="cta container">
+      <p>Want to browse them all?</p>
+      <a href="courses.html" class="btn">View Full A–Z Directory</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 UK Golf Directory</div>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="courses.html">All Courses</a>
+      </nav>
     </div>
-  </section>
-
-  <!-- Flyover Videos -->
-  <section class="featured-videos">
-    <h2>Flyover Videos</h2>
-    <div class="video-grid">
-      <iframe src="https://www.youtube.com/embed/6x3UuTgs4pI" title="St Andrews Flyover" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/HEeypVgIqxA" title="Royal Birkdale Flyover" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/_4DE1IHW7nQ" title="Royal Portrush Flyover" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/u1YhK4w3A18" title="Celtic Manor Flyover" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/3vZJ6W8t7H8" title="Wentworth Flyover" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 UK Golf Directory. All rights reserved.</p>
   </footer>
 
-  <!-- Map Script -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="courses.js"></script>
   <script>
-    var map = L.map('map').setView([55.3781, -3.4360], 6);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+    // Init Map
+    const map = L.map("map", { scrollWheelZoom:false }).setView([54.5, -3], 6);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
 
-    var courses = [
-      { name: "St Andrews Links", coords: [56.3429, -2.8030], url: "course.html?id=1" },
-      { name: "Royal Birkdale", coords: [53.5917, -3.0414], url: "course.html?id=2" },
-      { name: "Royal Portrush", coords: [55.2045, -6.6493], url: "course.html?id=3" },
-      { name: "Celtic Manor", coords: [51.6040, -2.9320], url: "course.html?id=4" },
-      { name: "Wentworth Club", coords: [51.4010, -0.5789], url: "course.html?id=5" }
-    ];
+    // Populate markers from courses.js
+    courses.forEach(c => {
+      if (c.lat && c.lng) {
+        L.marker([c.lat, c.lng]).addTo(map).bindPopup(
+          `<b>${c.name}</b><br><a href="course.html?id=${c.id}">View Details</a>`
+        );
+      }
+    });
 
-    courses.forEach(course => {
-      L.marker(course.coords).addTo(map)
-        .bindPopup(`<b>${course.name}</b><br><a href="${course.url}">View Details</a>`);
+    // Fill county filter
+    const countySet = new Set(courses.map(c => c.county).filter(Boolean));
+    const countySelect = document.getElementById("filter-county");
+    countySet.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c; opt.textContent = c;
+      countySelect.appendChild(opt);
+    });
+
+    // Render featured courses
+    const resultsGrid = document.getElementById("results-grid");
+    function renderCourses(list) {
+      resultsGrid.innerHTML = "";
+      list.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "course-card";
+        div.innerHTML = `
+          <img src="${c.image}" alt="${c.name}">
+          <h3>${c.name}</h3>
+          <p>${c.county}</p>
+          ${c.youtube ? `<iframe src="https://www.youtube.com/embed/${c.youtube}" frameborder="0" allowfullscreen></iframe>` : ""}
+          <a href="course.html?id=${c.id}" class="btn-small">View Course</a>
+        `;
+        resultsGrid.appendChild(div);
+      });
+    }
+    renderCourses(courses.slice(0, 10)); // featured
+
+    // Filtering logic
+    function applyFilters() {
+      const county = countySelect.value;
+      const par = document.getElementById("filter-par").value;
+      const length = document.getElementById("filter-length").value;
+      const diff = document.getElementById("filter-difficulty").value;
+
+      let list = courses;
+      if (county) list = list.filter(c => c.county === county);
+      if (par) list = list.filter(c => String(c.par) === par);
+      if (length) {
+        list = list.filter(c => {
+          if (!c.length) return false;
+          if (length === "short") return c.length <= 5500;
+          if (length === "medium") return c.length > 5500 && c.length <= 6500;
+          if (length === "long") return c.length > 6500;
+        });
+      }
+      if (diff) list = list.filter(c => String(c.difficulty) === diff);
+
+      renderCourses(list.length ? list : []);
+    }
+    document.querySelectorAll(".filters select").forEach(sel => {
+      sel.addEventListener("change", applyFilters);
     });
   </script>
 </body>
