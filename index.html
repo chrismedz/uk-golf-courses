@@ -5,51 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UK Golf Directory</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
+  <!-- Ad Banner Placeholder -->
+  <div class="ad-banner">
+    <p>Ad Space – Your Ad Here</p>
+    <!-- Later replace with AdSense script -->
+  </div>
+
   <!-- Header -->
   <header class="site-header">
     <h1>UK Golf Directory</h1>
     <p class="tagline">Filter by county, par, length and difficulty — then dive into rich course pages with maps, fees, and flyover videos.</p>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
     <h2>Discover the Best Golf Courses Across the UK</h2>
     <p>Browse hundreds of UK golf courses with detailed pages including maps, fees, flyovers, and more.</p>
   </section>
 
-  <!-- Filters -->
-  <section class="filters">
-    <h2>Find Your Course</h2>
-    <form>
-      <select>
-        <option>All Counties</option>
-        <option>Scotland</option>
-        <option>England</option>
-        <option>Wales</option>
-        <option>Northern Ireland</option>
-      </select>
-      <select>
-        <option>Par</option>
-        <option>Par 3</option>
-        <option>Par 4</option>
-        <option>Par 5</option>
-      </select>
-      <select>
-        <option>Length</option>
-        <option>Short</option>
-        <option>Medium</option>
-        <option>Long</option>
-      </select>
-      <select>
-        <option>Difficulty</option>
-        <option>Beginner</option>
-        <option>Intermediate</option>
-        <option>Challenging</option>
-      </select>
-      <button type="submit">Search</button>
-    </form>
+  <!-- Interactive Map -->
+  <section class="map-section">
+    <h2>Explore Courses on the Map</h2>
+    <div id="map"></div>
+  </section>
+
+  <!-- Find a Course (A-Z List) -->
+  <section class="find-course">
+    <h2>Find a Course</h2>
+    <div class="az-list">
+      <a href="#">A</a><a href="#">B</a><a href="#">C</a> ... <a href="#">Z</a>
+    </div>
+    <ul class="course-list">
+      <li>St Andrews Links – Scotland</li>
+      <li>Royal Birkdale – England</li>
+      <li>Royal Portrush – Northern Ireland</li>
+      <li>Celtic Manor – Wales</li>
+      <li>Wentworth Club – England</li>
+    </ul>
   </section>
 
   <!-- Featured Courses -->
@@ -68,22 +64,36 @@
         <p>England • Par 70 • 7081 yards</p>
         <a href="course.html?id=2" class="btn">View Details</a>
       </div>
+      <div class="course-card">
+        <img src="images/royal-portrush.jpg" alt="Royal Portrush">
+        <h3>Royal Portrush</h3>
+        <p>Northern Ireland • Par 72 • 7317 yards</p>
+        <a href="course.html?id=3" class="btn">View Details</a>
+      </div>
+      <div class="course-card">
+        <img src="images/celtic-manor.jpg" alt="Celtic Manor">
+        <h3>Celtic Manor</h3>
+        <p>Wales • Par 71 • 7493 yards</p>
+        <a href="course.html?id=4" class="btn">View Details</a>
+      </div>
+      <div class="course-card">
+        <img src="images/wentworth.jpg" alt="Wentworth">
+        <h3>Wentworth Club</h3>
+        <p>England • Par 72 • 7302 yards</p>
+        <a href="course.html?id=5" class="btn">View Details</a>
+      </div>
     </div>
   </section>
 
-  <!-- YouTube Section -->
+  <!-- Flyover Videos -->
   <section class="featured-videos">
     <h2>Flyover Videos</h2>
     <div class="video-grid">
-      <iframe src="https://www.youtube.com/embed/6x3UuTgs4pI" 
-        title="St Andrews Flyover" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
-
-      <iframe src="https://www.youtube.com/embed/n7FR4MSSp2Y" 
-        title="Royal Birkdale Flyover" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/GE5tY4lnYrI" title="St Andrews Flyover" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/HEeypVgIqxA" title="Royal Birkdale Flyover" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/_4DE1IHW7nQ" title="Royal Portrush Flyover" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/u1YhK4w3A18" title="Celtic Manor Flyover" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/3vZJ6W8t7H8" title="Wentworth Flyover" frameborder="0" allowfullscreen></iframe>
     </div>
   </section>
 
@@ -91,5 +101,27 @@
   <footer>
     <p>© 2025 UK Golf Directory. All rights reserved.</p>
   </footer>
+
+  <!-- Map Script -->
+  <script>
+    var map = L.map('map').setView([55.3781, -3.4360], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var courses = [
+      { name: "St Andrews Links", coords: [56.3429, -2.8030], url: "course.html?id=1" },
+      { name: "Royal Birkdale", coords: [53.5917, -3.0414], url: "course.html?id=2" },
+      { name: "Royal Portrush", coords: [55.2045, -6.6493], url: "course.html?id=3" },
+      { name: "Celtic Manor", coords: [51.6040, -2.9320], url: "course.html?id=4" },
+      { name: "Wentworth Club", coords: [51.4010, -0.5789], url: "course.html?id=5" }
+    ];
+
+    courses.forEach(course => {
+      L.marker(course.coords).addTo(map)
+        .bindPopup(`<b>${course.name}</b><br><a href="${course.url}">View Details</a>`);
+    });
+  </script>
 </body>
 </html>
